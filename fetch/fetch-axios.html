@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../assets/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body class="p-5">
+<div id="app">
+    <div class="container">
+        <h2>Ürünler ({{list.lenght}} kayıt)</h2>
+        <hr>
+        <button class="btn btn-success float-end" @click="itemNew">Yeni Ürün</button>
+
+        <table class="table-sm table table-bordered">
+
+            <tbody>
+            <tr v-if="!list.length">
+                <td>Kayıt Yok</td>
+            </tr>
+            <tr v-for="(item,index) in list">
+                <td>{{index}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.price}}</td>
+                <td>
+                    <button class="btn btn-success btn-sm float-end" @click="itemEdit(item.id)">Düzenle</button>
+                </td>
+                <td>
+                    <button class="btn btn-danger btn-sm float-end" @click="itemDelete(item.id)">Sil</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="../assets/vue2.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            list: [],
+        },
+        created() {
+            this.getproducts();
+        },
+        methods: {
+            getproducts() {
+                axios.get('https://jsonplaceholder.typicode.com/todos')
+
+                    .then((res) => {
+                        debugger;
+                        this.list = res.data;
+                    })
+            },
+
+            itemNew() {
+
+            },
+            itemEdit(id) {
+
+            },
+            itemDelete(id) {
+
+            }
+        }
+    });
+</script>
+</body>
+</html>
